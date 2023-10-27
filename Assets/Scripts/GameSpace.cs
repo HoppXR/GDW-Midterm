@@ -26,7 +26,7 @@ public class GameSpace : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Player2"))
         {
             canTreat = true;
         }
@@ -45,14 +45,17 @@ public class GameSpace : MonoBehaviour
             if (diseaseCubes == 1)
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[1];
+                diseaseCubes--;
             }
             else if (diseaseCubes == 2)
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[2];
+                diseaseCubes--;
             }
             else if (diseaseCubes == 3)
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[3];
+                diseaseCubes--;
             }
         }
         else if (canTreatAll == true)
@@ -60,6 +63,7 @@ public class GameSpace : MonoBehaviour
             canTreatAll = false;
 
             gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[0];
+            diseaseCubes = 0;
         }
     }
 }

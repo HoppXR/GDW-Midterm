@@ -11,21 +11,26 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
-        canMove = false;
+        MoveDisabled();
         transform.position = waypoints[waypointNum].transform.position;
     }
 
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            canMove = true;
-        }
-        
+    {  
         if (canMove)
         {
             move();
         }
+    }
+
+    public void MoveEnabled()
+    {
+        canMove = true;
+    }
+
+    public void MoveDisabled()
+    {
+        canMove = false;
     }
 
     void move()
@@ -36,8 +41,8 @@ public class PlayerMove : MonoBehaviour
 
             if (transform.position == waypoints[waypointNum].transform.position)
             {
+                MoveDisabled();
                 waypointNum += 1;
-                canMove = false;
             }
         }
     }
