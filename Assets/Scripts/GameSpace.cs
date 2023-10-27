@@ -10,6 +10,8 @@ public class GameSpace : MonoBehaviour
     bool canTreat;
     bool canTreatAll;
 
+    bool canAddDisease;
+
     void Start()
     {
         canTreat = false;
@@ -18,17 +20,25 @@ public class GameSpace : MonoBehaviour
 
     private void Update()
     {
+        updateSprite();
+
         if (Input.GetMouseButtonDown(0))
         {
             treatDisease();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            addDisease();
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Player2"))
+        if (other.gameObject.CompareTag("Player"))
         {
             canTreat = true;
+            canAddDisease = true;
         }
         else if (other.gameObject.CompareTag("Medic"))
         {
@@ -40,30 +50,45 @@ public class GameSpace : MonoBehaviour
     {
         if (canTreat == true)
         {
+            Debug.Log("TREATDISEASE");
             canTreat = false;
-
-            if (diseaseCubes == 1)
-            {
-                gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[1];
-                diseaseCubes--;
-            }
-            else if (diseaseCubes == 2)
-            {
-                gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[2];
-                diseaseCubes--;
-            }
-            else if (diseaseCubes == 3)
-            {
-                gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[3];
-                diseaseCubes--;
-            }
+            diseaseCubes--;
         }
-        else if (canTreatAll == true)
+        else if (canTreatAll == true) 
         {
+            Debug.Log("MEDICTREAT");
             canTreatAll = false;
-
-            gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[0];
             diseaseCubes = 0;
+        }
+    }
+
+    void addDisease()
+    {
+        if (canAddDisease == true)
+        {
+            Debug.Log("DISEASE");
+            canAddDisease = false;
+            diseaseCubes++;
+        }
+    }
+
+    void updateSprite()
+    {
+        if (diseaseCubes == 0)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[0];
+        }
+        else if (diseaseCubes == 1)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[1];
+        }
+        else if (diseaseCubes == 2)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[2];
+        }
+        else if (diseaseCubes == 3)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[3];
         }
     }
 }
