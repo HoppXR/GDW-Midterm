@@ -44,6 +44,10 @@ public class GameSpace : MonoBehaviour
         {
             canTreatAll = true;
         }
+        else if (other.gameObject.CompareTag("Infected"))
+        {
+            diseaseCubes += 2;
+        }
     }
 
     void treatDisease()

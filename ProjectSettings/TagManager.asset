@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Medic
   - Player2
+  - Infected
   layers:
   - Default
   - TransparentFX
