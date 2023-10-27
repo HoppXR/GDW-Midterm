@@ -8,10 +8,12 @@ public class GameSpace : MonoBehaviour
     [SerializeField] private int diseaseCubes;
     [SerializeField] Sprite[] diseaseLevel;
     bool canTreat;
+    bool canTreatAll;
 
     void Start()
     {
         canTreat = false;
+        canTreatAll = false;
     }
 
     private void Update()
@@ -27,6 +29,10 @@ public class GameSpace : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             canTreat = true;
+        }
+        else if (other.gameObject.CompareTag("Medic"))
+        {
+            canTreatAll = true;
         }
     }
 
@@ -48,6 +54,12 @@ public class GameSpace : MonoBehaviour
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[3];
             }
+        }
+        else if (canTreatAll == true)
+        {
+            canTreatAll = false;
+
+            gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[0];
         }
     }
 }
