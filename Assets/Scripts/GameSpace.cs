@@ -6,24 +6,48 @@ using UnityEngine;
 public class GameSpace : MonoBehaviour
 {
     [SerializeField] private int diseaseCubes;
-
-    [SerializeField] private Sprite dc1, dc2, dc3;
+    [SerializeField] Sprite[] diseaseLevel;
+    bool canTreat;
 
     void Start()
     {
-
+        canTreat = false;
     }
 
     private void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            treatDisease();
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            canTreat = true;
+        }
+    }
+
+    void treatDisease()
+    {
+        if (canTreat == true)
+        {
+            canTreat = false;
+
+            if (diseaseCubes == 1)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[1];
+            }
+            else if (diseaseCubes == 2)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[2];
+            }
+            else if (diseaseCubes == 3)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = diseaseLevel[3];
+            }
         }
     }
 }
