@@ -50,13 +50,11 @@ public class GameSpace : MonoBehaviour
     {
         if (canTreat == true)
         {
-            Debug.Log("TREATDISEASE");
             canTreat = false;
             diseaseCubes--;
         }
         else if (canTreatAll == true) 
         {
-            Debug.Log("MEDICTREAT");
             canTreatAll = false;
             diseaseCubes = 0;
         }
@@ -66,7 +64,6 @@ public class GameSpace : MonoBehaviour
     {
         if (canAddDisease == true)
         {
-            Debug.Log("DISEASE");
             canAddDisease = false;
             diseaseCubes++;
         }
